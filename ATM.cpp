@@ -67,7 +67,7 @@ public:
 		}
 		else
 		{
-			cout << setw (70) << right << "He thong dang bao tri moi ban quay lai sau !!!" << endl;
+			cout << setw (70) << right << "He thong hien dang bao tri moi ban quay lai sau !!!" << endl;
 			exit(0);
 		}	
 	}
@@ -120,7 +120,7 @@ public:
 		{
 			system("cls");
 			cout << setw (70) << right << "*************************************" << endl;
-			cout << setw(70) << right << "            DANG NHAP USER            "<<endl;
+			cout << setw(70) << right << "            Dang Nhap USER            "<<endl;
 			cout << setw (70) << right << "*************************************" << endl;
 			cout << setw(44) << right << "ID: ";
 			cin >> _id;
@@ -137,8 +137,8 @@ public:
 			{
 				if(a[index].status == 0)
 				{
-					cout << setw(67) << right << "TAI KHOAN CUA BAN DA BI KHOA !!!" << endl;
-					cout << setw(66) << right << "LIEN HE NGAN HANG DE GIAI QUYET" << endl;
+					cout << setw(67) << right << " TAI KHOAN CUA BAN DA BI KHOA !!! " << endl;
+					cout << setw(66) << right << "LIEN HE NGAN HANG DE GIAI QUYET !!!" << endl;
 					system("pause");
 					exit(0);
 				}	
@@ -166,7 +166,7 @@ public:
 						system("pause");
 						system("cls");
 						cout << setw (70) << right << "*************************************" << endl;
-						cout << setw(70) << right << "            DANG NHAP USER            "<<endl;
+						cout << setw(70) << right << "            Dang Nhap USER            "<<endl;
 						cout << setw (70) << right << "*************************************" << endl;
 						cout << setw(44) << right << "ID: " << _id << endl;
 					}	
@@ -186,7 +186,7 @@ public:
 	{
 		string _pin1,_pin2;
 		tryagain:
-		cout << setw (70) << right << "             Doi Ma Pin             " << endl;
+		cout << setw (70) << right << "             DOI MA PIN             " << endl;
 		cout << setw (70) << right << "-------------------------------------" << endl;
 		cout << setw (34) << "" << "Nhap ma PIN moi: ";
 		_pin1 = passwordInput(6);
@@ -203,13 +203,13 @@ public:
 			system("pause");
 			system("cls");
 			cout << "\n\n";
-			cout << setw (70) << right << "****************Menu*****************" << endl;
-			cout << setw (70) << right << "     1. Xem thong tin tai khoan      " << endl;
-			cout << setw (70) << right << "     2. Rut tien                     " << endl;
-			cout << setw (70) << right << "     3. Chuyen tien                  " << endl;
-			cout << setw (70) << right << "     4. Xem noi dung giao dich       " << endl;
-			cout << setw (70) << right << "     5. Doi ma PIN                   " << endl;
-			cout << setw (70) << right << "     6. Thoat                        " << endl;
+			cout << setw (70) << right << "*****************MENU****************" << endl;
+			cout << setw (70) << right << "*    1. Xem thong tin tai khoan     *" << endl;
+			cout << setw (70) << right << "*    2. Rut tien                    *" << endl;
+			cout << setw (70) << right << "*    3. Chuyen tien                 *" << endl;
+			cout << setw (70) << right << "*    4. Xem noi dung giao dich      *" << endl;
+			cout << setw (70) << right << "*    5. Doi ma PIN                  *" << endl;
+			cout << setw (70) << right << "*    6. Thoat                       *" << endl;
 			cout << setw (70) << right << "*************************************" << endl;
 			goto tryagain;
 		}	
@@ -277,7 +277,7 @@ public:
 		}
 		else
 		{
-			cout << setw (70) << right << "He thong dang bao tri moi ban quay lai sau !!!" << endl;
+			cout << setw (70) << right << "He thong hien dang bao tri, moi ban quay lai sau !!!" << endl;
 			exit(0);
 		}	
 	}
@@ -298,13 +298,13 @@ public:
 	void MenuUser()
 	{
 		cout << "\n\n";
-		cout << setw (70) << right << "****************Menu*****************" << endl;
-		cout << setw (70) << right << "     1. Xem thong tin tai khoan      " << endl;
-		cout << setw (70) << right << "     2. Rut tien                     " << endl;
-		cout << setw (70) << right << "     3. Chuyen tien                  " << endl;
-		cout << setw (70) << right << "     4. Xem noi dung giao dich       " << endl;
-		cout << setw (70) << right << "     5. Doi ma PIN                   " << endl;
-		cout << setw (70) << right << "     6. Thoat                        " << endl;
+		cout << setw (70) << right << "*****************Menu****************" << endl;
+		cout << setw (70) << right << "*    1. Xem thong tin tai khoan     *" << endl;
+		cout << setw (70) << right << "*    2. Rut tien                    *" << endl;
+		cout << setw (70) << right << "*    3. Chuyen tien                 *" << endl;
+		cout << setw (70) << right << "*    4. Xem noi dung giao dich      *" << endl;
+		cout << setw (70) << right << "*    5. Doi ma PIN                  *" << endl;
+		cout << setw (70) << right << "*    6. Thoat                       *" << endl;
 		cout << setw (70) << right << "*************************************" << endl;
 	}
 
@@ -372,7 +372,7 @@ public:
 	void ChuyenTien(User a[], TheTu b[], int n, int index)
 	{
 		string _id;
-		cout << setw (70) << right << "            Chuyen Khoan             " << endl;
+		cout << setw (70) << right << "             Chuyen Khoan            " << endl;
 		cout << setw (70) << right << "-------------------------------------" << endl;
 		cout << setw (34) << "" << "Nhap so tai khoan can chuyen: ";
 		cin >> _id;
@@ -401,7 +401,7 @@ public:
 				system("pause");
 				system("cls");
 				MenuUser();
-				cout << setw (70) << right << "            Chuyen Khoan             " << endl;
+				cout << setw (70) << right << "             Chuyen Khoan            " << endl;
 				cout << setw (70) << right << "-------------------------------------" << endl;
 				cout << setw (34) << "" << "Nhap so tai khoan can chuyen: " << _id << endl;
 				goto tryagain; 
@@ -467,7 +467,7 @@ public:
 
 	friend void xemNoiDungGiaoDich(LichSu a[], int n)
 	{
-		cout << setw (70) << right << "         Lich Su Giao Dich           " << endl;
+		cout << setw (70) << right << "          Lich Su Giao Dich          " << endl;
 		cout << setw (70) << right << "-------------------------------------" << endl;
 		cout << setw(4) << ""  << setw(20) << left << "Loai giao dich";
 		cout << setw(4) << ""  << setw(20) << left << "So tien";
@@ -509,12 +509,12 @@ public:
 	void menuAdmin()
 	{
 		cout << "\n\n";
-		cout << setw (70) << right << "****************Menu*****************" << endl;
-		cout << setw (70) << right << "     1. Xem danh sach tai khoan      " << endl;
-		cout << setw (70) << right << "     2. Them tai khoan               " << endl;
-		cout << setw (70) << right << "     3. Xoa tai khoan                " << endl;
-		cout << setw (70) << right << "     4. Mo khoa tai khoan            " << endl;
-		cout << setw (70) << right << "     5. Thoat                        " << endl;
+		cout << setw (70) << right << "***************Menu******************" << endl;
+		cout << setw (70) << right << "*    1. Xem danh sach tai khoan     *" << endl;
+		cout << setw (70) << right << "*    2. Them tai khoan              *" << endl;
+		cout << setw (70) << right << "*    3. Xoa tai khoan               *" << endl;
+		cout << setw (70) << right << "*    4. Mo khoa tai khoan           *" << endl;
+		cout << setw (70) << right << "*    5. Thoat                       *" << endl;
 		cout << setw (70) << right << "*************************************" << endl;
 	}
 
@@ -530,7 +530,7 @@ public:
 		}
 		else
 		{
-			cout << setw (70) << right << "He thong dang bao tri moi ban quay lai sau !!!" << endl;
+			cout << setw (70) << right << "He thong hien dang bao tri moi ban quay lai sau !!!" << endl;
 			exit(0);
 		}	
 	}
@@ -542,11 +542,11 @@ public:
 		{
 			system("cls");
 			cout << setw (70) << right << "*************************************" << endl;
-			cout << setw(70) << right << "            DANG NHAP Admin           " <<endl;
+			cout << setw(70) << right << " *          Dang nhap Admin          *" <<endl;
 			cout << setw (70) << right << "*************************************" << endl;
 			cout << setw(44) << right << "Admin: ";
 			cin >> _id;
-			cout << setw(43) << right << "PASS: ";
+			cout << setw(43) << right << "Pass: ";
 			_pass = passwordInput(6);
 			for (int i = 0; i < n; ++i)
 			{
@@ -561,11 +561,11 @@ public:
 					return;
 				}
 			}
-			cout << setw(71) << right << "Tai khoan hoac mat khau khong dung !!!" << endl;
+			cout << setw(65) << right << "Tai khoan hoac mat khau cua ban khong dung !!!" << endl;
 			dem++;
 			system("pause");
 		}
-		cout << setw(63) << right << "BAN DA NHAP SAI QUA NHIEU LAN !!!" << endl;
+		cout << setw(65) << right << "BAN DA NHAP SAI QUA NHIEU LAN !!!" << endl;
 		system("pause");
 		exit(0);
 	}
@@ -641,7 +641,7 @@ public:
 	void xoaTaiKhoan(User a[], TheTu b[], int &n)
 	{
 		string _id;
-		cout << setw (34) << "" << "Nhap ID tai khoan muon xoa: ";
+		cout << setw (34) << "" << "Vui long nhap ID tai khoan muon xoa: ";
 		cin >> _id;
 		int index = SearchID(b, n, _id);
 		if(index == -1)
@@ -667,7 +667,7 @@ public:
 		while(true)
 		{	system("cls");
 			menuAdmin();
-			cout << setw (70) << right << "             TAO TAI KHOAN           " << endl;
+			cout << setw (70) << right << "             Tao tai khoan          " << endl;
 			cout << setw (44) << right << "ID: " ;
 			cin >> _id;
 			if (SearchID(b, n, _id) != -1)
@@ -716,11 +716,11 @@ int main()
 	while (true)
 	{	
 		cout << "\n\n";
-		cout << setw (70) << right << "****************MENU*****************" << endl;
-		cout << setw (70) << right << "         1.Dang nhap User            " << endl;
-		cout << setw (70) << right << "         2.Dang nhap Admin           " << endl;
+		cout << setw (70) << right << "*****************MENU****************" << endl;
+		cout << setw (70) << right << "*         1.Dang nhap User          *" << endl;
+		cout << setw (70) << right << "*         2.Dang nhap Admin         *" << endl;
 		cout << setw (70) << right << "*************************************" << endl;
-		cout << setw (60) << right <<"Nhap lua chon cua ban: ";
+		cout << setw (65) << right << "Vui long nhap lua chon cua ban: ";
 		cin >> choose;
 		if (choose == "1")
 		{
@@ -728,7 +728,7 @@ int main()
 			while (true)
 			{
 				arr_User[index].MenuUser();
-				cout << setw (60) << right <<"Nhap lua chon cua ban: ";
+				cout << setw (65) << right <<"Vui long nhap lua chon cua ban: ";
 				cin >> choose;
 				cout << setw (70) << right <<"-------------------------------------" << endl;
 				cout << endl;
@@ -773,7 +773,7 @@ int main()
 			while (true)
 			{
 				arr_Admin[n_Admin].menuAdmin();
-				cout << setw (60) << right <<"Nhap lua chon cua ban: ";
+				cout << setw (65) << right <<"Vui long nhap lua chon cua ban: ";
 				cin >> choose;
 				cout << setw (70) << right <<"-------------------------------------" << endl;
 				cout << endl;
@@ -809,7 +809,7 @@ int main()
 		{
 			system("cls");
 			cout << "\n\n\n";
-			cout << setw (34) << "" << "Nhap Sai !!!" << endl;
+			cout << setw (34) << "" << "NHAP SAI !!!" << endl;
 			cout << "\n\n\n";
 			system("pause");
 			system("cls");
