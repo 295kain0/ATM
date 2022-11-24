@@ -871,5 +871,5 @@ void dinhDang()
 {
 	SetConsoleTitle("ATM demo");// Tiêu đề console
 	 HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-	 SetConsoleTextAttribute(hStdout, 5);//Màu text (màu hồng nam tính)
+	 SetConsoleTextAttribute(hStdout, 14);//Màu text (màu vàng)
 }
