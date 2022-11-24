@@ -10,7 +10,6 @@
 using namespace std;
 string passwordInput(unsigned maxLength);
 string password(unsigned maxLength);
-void setCoLor(int backgound_color, int text_color);
 void dinhDang();
 class TheTu
 {
@@ -28,10 +27,10 @@ public:
 	{
 		id = _id;
 		pin = _pin;
-		status = 1;
+		status = 1; // 1: trạng thái bình thường, 0: trạng thái đã bị khóa
 	}
 
-	TheTu (const TheTu &p)
+	TheTu (const TheTu &p)//Hàm tạo thẻ từ
 	{
 		id = p.id;
 		pin = p.pin;
@@ -45,9 +44,9 @@ public:
 		status = 1;
 	}
 
-	~TheTu(){};
+	~TheTu(){};// Hàm hủy thẻ từ
 
-	friend istream& operator >> (istream& is, TheTu &p)
+	friend istream& operator >> (istream& is, TheTu &p)// Hàm nhập thẻ từ
 	{
 		is >> p.id;
 		is >> p.pin;
@@ -55,11 +54,11 @@ public:
 		return is;
 	} 
 	
-	friend void loadDSTheTu(TheTu a[], int &n)
+	friend void loadDSTheTu(TheTu a[], int &n)//Hàm danh sách thẻ từ
 	{
-		ifstream in;
-		in.open("TheTu.txt");
-		if(in.is_open())
+		ifstream in;//Đọc thông tin từ file 
+		in.open("TheTu.txt");//Mở file TheTu.txt
+		if(in.is_open())//Mở file TheTu.txt thành công
 		{
 			n = 0;
 			while(in >> a[n]) { n++; }
@@ -74,8 +73,8 @@ public:
 
 	void updateDSTheTu(TheTu a[], int n)
 	{
-		ofstream o;
-		o.open("TheTu.txt");
+		ofstream o;//Tạo file và ghi thông tin lên file
+		o.open("TheTu.txt");//Mở file TheTu.txt
 		for (int i = 0; i < n; ++i)
 		{
 			o << a[i].id << endl;
@@ -87,12 +86,14 @@ public:
 
 	void ghiNoiDungGiaoDich(string _loaigiaodich, long _sotien)
 	{
-		time_t now;
+		time_t now;//Thời gian hiện tại theo hệ thống tính theo giây (tính từ 1/1/1970)
 		time(&now);
 		string s;
-		s = ctime(&now);
+		s = ctime(&now);//Chuyển đổi sang dạng localtime rồi hiển thị dưới dạng ký tự
 		ofstream o;
-		o.open("LichSuID.txt", ios:: app);
+		o.open("LichSuID.txt", ios:: app);//Tất cả output tới file được thêm vào cuối file
+
+		//ghi và in lần lượt thông số
 		o << id << endl;
 		o << _loaigiaodich << endl;
 		o << _sotien << endl;
@@ -100,7 +101,7 @@ public:
 		o.close();
 	}
 
-	int SearchID(TheTu a[], int n, string _id)
+	int SearchID(TheTu a[], int n, string _id)//Hàm tìm kiếm ID
 	{
 		int index = -1;
 		for (int i = 0; i < n; ++i)
@@ -115,34 +116,34 @@ public:
 	void dangNhapUser(TheTu a[], int n, int &index)
 	{
 		string _id, _pin;
-		int dem = 0;
+		int dem = 0;//Đếm số lần nhập sai Pass
 		while(true)
 		{
-			system("cls");
+			system("cls");//Xóa màn hình của console
 			cout << setw (70) << right << "*************************************" << endl;
-			cout << setw(70) << right << "            Dang Nhap USER            "<<endl;
+			cout << setw(70) << right <<  "*           Dang Nhap USER          *"<<endl;
 			cout << setw (70) << right << "*************************************" << endl;
 			cout << setw(44) << right << "ID: ";
 			cin >> _id;
 			index = SearchID(a, n, _id);
-			if (index == -1)
+			if (index == -1)//Trường hợp không tìm thấy ID
 			{
 				system("cls");
 				cout << "\n\n\n";
 				cout << setw(55) << right << "ID khong ton tai !!!" << endl;
 				cout << "\n\n\n";
-				cout << setw(55) << right << system("pause");
+				cout << setw(55) << right << system("pause");//Dừng màn hình console
 			}
 			else
 			{
-				if(a[index].status == 0)
+				if(a[index].status == 0)//ID ở trạng thái đã bị khóa
 				{
 					cout << setw(67) << right << " TAI KHOAN CUA BAN DA BI KHOA !!! " << endl;
 					cout << setw(66) << right << "LIEN HE NGAN HANG DE GIAI QUYET !!!" << endl;
 					system("pause");
 					exit(0);
 				}	
-				while(dem < 3)
+				while(dem < 3)//Trường hợp nhập đúng mã PIN
 				{	
 					cout << setw(44) << right << "PIN: ";
 					_pin = passwordInput(6);
@@ -156,7 +157,7 @@ public:
 						system("cls");
 						return;
 					}
-					else
+					else//Trường hợp nhập sai mã PIN
 					{
 						dem++;
 						system("cls");
@@ -166,7 +167,7 @@ public:
 						system("pause");
 						system("cls");
 						cout << setw (70) << right << "*************************************" << endl;
-						cout << setw(70) << right << "            Dang Nhap USER            "<<endl;
+						cout << setw(70) << right <<  "*           Dang Nhap USER          *"<<endl;
 						cout << setw (70) << right << "*************************************" << endl;
 						cout << setw(44) << right << "ID: " << _id << endl;
 					}	
@@ -185,19 +186,19 @@ public:
 	void doiMaPin()
 	{
 		string _pin1,_pin2;
-		tryagain:
+		tryAgain:
 		cout << setw (70) << right << "             DOI MA PIN             " << endl;
 		cout << setw (70) << right << "-------------------------------------" << endl;
 		cout << setw (34) << "" << "Nhap ma PIN moi: ";
 		_pin1 = passwordInput(6);
 		cout << setw (34) << "" << "Nhap lai ma PIN: ";
 		_pin2 = passwordInput(6);
-		if (_pin1 == _pin2)
+		if (_pin1 == _pin2)//Trường hợp nhập khớp mã PIN
 		{
 			pin = _pin1;
 			cout << setw (34) << "" << "Ban da doi ma PIN thanh cong !!!" << endl;
 		}
-		else
+		else//Trường hợp nhập mã PIN không khớp
 		{
 			cout << setw (34) << "" << "Ma PIN khong khop !!!" << endl;
 			system("pause");
@@ -211,7 +212,7 @@ public:
 			cout << setw (70) << right << "*    5. Doi ma PIN                  *" << endl;
 			cout << setw (70) << right << "*    6. Thoat                       *" << endl;
 			cout << setw (70) << right << "*************************************" << endl;
-			goto tryagain;
+			goto tryAgain;//Hàm nhảy đến nhãn tryAgain
 		}	
 	}
 
@@ -228,7 +229,7 @@ public:
 	string getName() { return name; }
 	long getSodu() { return sodu; }
 	string getDv() { return dv; }
-	User(string _name = "", long _sodu = 0, string _dv = "", string _id = "")
+	User(string _name = "", long _sodu = 0, string _dv = "", string _id = "")//Hàm khởi tạo User
 	{
 		id = _id;
 		name = _name;
@@ -236,7 +237,7 @@ public:
 		dv = _dv;
 	}
 
-	User(const User &p)
+	User(const User &p)//Hàm sao chép User
 	{
 		id = p.id;
 		name = p.name;
@@ -252,9 +253,9 @@ public:
 		dv = _dv;
 	}
 
-	~User(){};
+	~User(){};//Hàm hủy User
 
-	friend istream& operator >> (istream& is, User &p)
+	friend istream& operator >> (istream& is, User &p)//Hàm nhập User
 	{
 		is >> p.id;
 		is.ignore();
@@ -267,9 +268,9 @@ public:
 
 	friend void LoadDSuser(User a[], int &n)
 	{
-		ifstream in;
-		in.open("ID.txt");
-		if(in.is_open())
+		ifstream in;//Đọc thông tin từ file 
+		in.open("ID.txt");//Mở file ID.txt
+		if(in.is_open())//Mở file ID.txt thành công
 		{
 			n = 0;
 			while(in >> a[n]) { n++; }
@@ -284,8 +285,8 @@ public:
 
 	void updateDSUser(User a[], int n)
 	{
-		ofstream o;
-		o.open("ID.txt");
+		ofstream o;//Tạo file và ghi thông tin lên file
+		o.open("ID.txt");//Mở file ID.txt
 		for (int i = 0; i < n; ++i)
 		{
 			o << a[i].id << endl;
@@ -310,7 +311,7 @@ public:
 
 	void XemThongTinTaiKhoan()
 	{
-		cout << setw (70) << right << "            Tai Khoan               " << endl;
+		cout << setw (70) << right << "              Tai Khoan              " << endl;
 		cout << setw (70) << right << "-------------------------------------" << endl;
 		cout << setw (34) << "" << "ID: " << id << endl;
 		cout << setw (34) << "" << "Ho va ten: " << name << endl;
@@ -321,7 +322,7 @@ public:
 	{
 		string choose;
 		int money; 
-		tryagain:
+		tryAgain:
 		cout << setw (70) << right << "               Rut Tien              " << endl;
 		cout << setw (70) << right << "-------------------------------------" << endl;
 		cout << setw (34) << "" << "1. 1.000.000 VND" << endl;
@@ -349,7 +350,7 @@ public:
 			cin >> money;
 		}
 		
-		if( (money % 50000 == 0) && (money >= 50000) && (sodu - money >= 50000))
+		if( (money % 50000 == 0) && (money >= 50000) && (sodu - money >= 50000))//Điều kiện rút tiền không có trên bảng lựa chọn
 		{
 			sodu -= money;
 			ghiNoiDungGiaoDich("Rut Tien", money*-1);
@@ -357,7 +358,7 @@ public:
 			cout << setw (34) << "" << "So du tai khoan: " << sodu << " " << dv << endl;
 			cout << setw (34) << "" << "Nhan the truoc khi nhan tien !!!" << endl;
 		}
-		else
+		else//Trường hợp giao dịch không thành công
 		{
 			cout << setw (34) << "" << "Giao dich khong thanh cong !!!" << endl;
 			cout << setw (34) << "" << "So tien rut phai >= 50.000 VND" << endl;
@@ -365,7 +366,7 @@ public:
 			system("pause");
 			system("cls");
 			MenuUser();
-			goto tryagain;
+			goto tryAgain;
 		}
 	}
 
@@ -380,20 +381,20 @@ public:
 		if (account != -1)
 		{
 			int money;
-			tryagain:
+			tryAgain:
 			cout << setw (34) << "" << "Nhap so tien can chuyen: ";
 			cin >> money;
 			if((money >= 50000) && (sodu - money >= 50000))
 			{
-				sodu -= money;
-				a[account].sodu += money;
+				sodu -= money;//Số dư tài khoản sau khi chuyển tiền
+				a[account].sodu += money;//Số dư tài khoảng sau khi nhận tiền
 				updateDSUser(a, n);
 				cout << setw (34) << "" << "Giao dich thanh cong !!!" << endl;
 				cout << setw (34) << "" << "So du tai khoan: " << sodu << " " << dv << endl;
 				ghiNoiDungGiaoDich("Chuyen Tien", money*-1);
 				a[account].ghiNoiDungGiaoDich("Nhan Tien", money); 
 			}
-			else
+			else//Trường hợp giao dịch không thành công
 			{
 				cout << setw (34) << "" << "Giao dich khong thanh cong !!!" << endl;
 				cout << setw (34) << "" << "So tien giao dich phai >= 50.000 VND" << endl;
@@ -404,10 +405,10 @@ public:
 				cout << setw (70) << right << "             Chuyen Khoan            " << endl;
 				cout << setw (70) << right << "-------------------------------------" << endl;
 				cout << setw (34) << "" << "Nhap so tai khoan can chuyen: " << _id << endl;
-				goto tryagain; 
+				goto tryAgain; 
 			}	
 		}
-		else
+		else//Trường hợp ID không tồn tại
 		{
 			cout << setw (34) << "" << "ID khong ton tai !!!" << endl; 
 		}	
@@ -421,16 +422,16 @@ class LichSu : public User
 	long sotien;
 	string thoigian;
 public:
-	LichSu(string _id = "", string _loai = "", long _sotien = 0, string _thoigian = "")
+	LichSu(string _id = "", string _loai = "", long _sotien = 0, string _thoigian = "")//Hàm khởi tạo lịch sử giao dịch
 	{
 		id = _id;
 		loai = _loai;
 		sotien = _sotien;
 		thoigian = _thoigian;
 	}
-	~LichSu(){};
+	~LichSu(){};//Hàm hủy lịch sử giao dịch
 	
-	friend istream& operator >> (istream& is, LichSu &p)
+	friend istream& operator >> (istream& is, LichSu &p)//Hàm nhập lịch sử
 	{
 		is >> p.id;
 		is.ignore();
@@ -442,9 +443,9 @@ public:
 	}	
 	friend void loadDSLichSu(LichSu a[], int &n, string _id)
 	{
-		ifstream in;
-		in.open("LichSuID.txt");
-		if (in.is_open())
+		ifstream in;//Đọc thông tin từ file
+		in.open("LichSuID.txt");//Mở file TheTu.txt
+		if (in.is_open())//Mở file TheTu.txt thành công
 		{
 			LichSu tmp;
 			n = 0;
@@ -465,7 +466,7 @@ public:
 		}	
 	}
 
-	friend void xemNoiDungGiaoDich(LichSu a[], int n)
+	friend void xemNoiDungGiaoDich(LichSu a[], int n)//Nội dung giao dịch của User
 	{
 		cout << setw (70) << right << "          Lich Su Giao Dich          " << endl;
 		cout << setw (70) << right << "-------------------------------------" << endl;
@@ -473,7 +474,7 @@ public:
 		cout << setw(4) << ""  << setw(20) << left << "So tien";
 		cout << setw(4) << ""  << setw(50) << left << "Thoi gian";
 		cout << endl;
-		for (int i = 0; i < n; ++i)
+		for (int i = 0; i < n; ++i)//Bao gồm đơn vị, số tiền, thời gian giao dịch
 		{
 			cout << setw(4) << ""  << setw(20) << left << a[i].loai;
 			cout << setw(4) << ""  << setw(20) << left << a[i].sotien;
@@ -486,13 +487,13 @@ public:
 class Admin : public User
 {
 public:
-	Admin(string _id = "", string _pin = "")
+	Admin(string _id = "", string _pin = "")//Hàm khỏi tạo Admin
 	{
 		id = _id;
 		pin = _pin;
 	}
 
-	Admin(const Admin &p)
+	Admin(const Admin &p)//Hàm sao chép Admin
 	{
 		id = p.id;
 		pin = p.pin;
@@ -500,7 +501,7 @@ public:
 
 	~Admin(){};
 	
-	friend istream& operator >> (istream& is, Admin &p)
+	friend istream& operator >> (istream& is, Admin &p)//Hàm nhập Admin
 	{
 		is >> p.id;
 		is >> p.pin;
@@ -520,9 +521,9 @@ public:
 
 	friend void loadDSAdmin(Admin a[], int &n)
 	{
-		ifstream in;
-		in.open("Admin.txt");
-		if(in.is_open())
+		ifstream in;//Đọc thông tin từ file 
+		in.open("Admin.txt");//Mở file Admin.txt
+		if(in.is_open())//Mở file Admin.txt thành công
 		{
 			n = 0;
 			while(in >> a[n]) { n++; }
@@ -537,10 +538,10 @@ public:
 	void dangNhapAdmin(Admin a[], int n)
 	{
 		string _id, _pass;
-		int dem = 0;
+		int dem = 0;//Đếm số lần nhập sai Pass
 		while(dem < 3)
 		{
-			system("cls");
+			system("cls");//Xóa màn hình của console
 			cout << setw (70) << right << "*************************************" << endl;
 			cout << setw(70) << right << " *          Dang nhap Admin          *" <<endl;
 			cout << setw (70) << right << "*************************************" << endl;
@@ -550,7 +551,7 @@ public:
 			_pass = passwordInput(6);
 			for (int i = 0; i < n; ++i)
 			{
-				if(a[i].id == _id && a[i].pin == _pass)
+				if(a[i].id == _id && a[i].pin == _pass)//Trường hợp nhập đúng ID và Pass
 				{
 					system("cls");
 					cout << "\n\n\n";
@@ -563,14 +564,14 @@ public:
 			}
 			cout << setw(65) << right << "Tai khoan hoac mat khau cua ban khong dung !!!" << endl;
 			dem++;
-			system("pause");
+			system("pause");//Dừng màn hình console
 		}
 		cout << setw(65) << right << "BAN DA NHAP SAI QUA NHIEU LAN !!!" << endl;
 		system("pause");
 		exit(0);
 	}
 
-	void xemDStaikhoan(User a[], TheTu b[], int n)
+	void xemDStaikhoan(User a[], TheTu b[], int n)//Danh sách tài khoản của toàn bộ User
 	{
 		
 		cout << setw(65) << right << "DANH SACH TAI KHOAN NGAN HANG" << endl;
@@ -588,13 +589,13 @@ public:
 			cout << setw(4) << "" << setw(30) << left << a[i].getName();
 			cout << setw(4) << "" << setw(10) << right << a[i].getSodu();
 			cout << setw(4) << "" << setw(10) << left << a[i].getDv();
-			cout << setw(6) << left << (b[i].getStatus() == 0 ? "bi khoa" : "binh thuong");
+			cout << setw(6) << left << (b[i].getStatus() == 0 ? "bi khoa" : "binh thuong");// 1: trạng thái bình thường, 0: trạng thái đã bị khóa
 			cout << endl;
 		}
 		cout << endl;
 	}
 
-	void danhSachTaiKhoanBiKhoa(User a[], TheTu b[], int n)
+	void danhSachTaiKhoanBiKhoa(User a[], TheTu b[], int n)//Danh sách tài khoản bị khóa
 	{
 		cout << setw(65) << right << "DANH SACH TAI KHOAN BI KHOA" << endl;
 		cout << endl;
@@ -613,24 +614,24 @@ public:
 				cout << setw(4) << "" << setw(30) << left << a[i].getName();
 				cout << setw(4) << "" << setw(10) << right << a[i].getSodu();
 				cout << setw(4) << "" << setw(10) << left << a[i].getDv();
-				cout << setw(6) << left << (b[i].getStatus() == 0 ? "bi khoa" : "binh thuong");
+				cout << setw(6) << left << (b[i].getStatus() == 0 ? "bi khoa" : "binh thuong");// 1: trạng thái bình thường, 0: trạng thái đã bị khóa
 				cout << endl;
 			}
 		}
 		cout << endl;
 	}
 
-	void moKhoaTaiKhoan(TheTu b[], int n)
+	void moKhoaTaiKhoan(TheTu b[], int n)//Mở khóa tài khoản User
 	{
 		string _id;
 		cout << setw (34) << "" << "Nhap ID cua tai khoan can mo khoa: ";
 		cin >> _id;
 		int index = SearchID(b, n, _id);
-		if (index == -1)
+		if (index == -1)//Trường hợp không tìm thấy ID
 		{
 			cout << setw (34) << ""  << "Khong tim thay ID !!!" << endl;
 		}
-		else
+		else//Trường hợp tìm thấy ID
 		{
 			b[index].setStatus(1);
 			updateDSTheTu(b, n);
@@ -638,18 +639,18 @@ public:
 		}	
 	}
 
-	void xoaTaiKhoan(User a[], TheTu b[], int &n)
+	void xoaTaiKhoan(User a[], TheTu b[], int &n)//Xóa tài khoản User
 	{
 		string _id;
 		cout << setw (34) << "" << "Vui long nhap ID tai khoan muon xoa: ";
 		cin >> _id;
 		int index = SearchID(b, n, _id);
-		if(index == -1)
+		if(index == -1)//Trường hợp không tìm thấy ID
 		{
 			cout << setw (34) << "" << "ID khong ton tai !!!" << endl;
 			return;
 		}	
-		for (int i = index; i < n-1; ++i)
+		for (int i = index; i < n-1; ++i)//Trường hợp tìm thấy ID
 		{
 			a[i] = a[i+1];
 			b[i] = b[i+1];
@@ -660,24 +661,24 @@ public:
 		cout << setw (34) << "" << "Da xoa tai khoan co ID: " << _id << endl;
 	}
 
-	void themTaiKhoan(User a[], TheTu b[], int &n)
+	void themTaiKhoan(User a[], TheTu b[], int &n)//Thêm tài khoản User
 	{
 		string _id, _name, _dv, _pin;
 		long _sodu;
-		while(true)
-		{	system("cls");
+		while(true)//Điều kiện luôn đúng
+		{	system("cls");//Xóa màn hình của console
 			menuAdmin();
-			cout << setw (70) << right << "             Tao tai khoan          " << endl;
+			cout << setw (70) << right << "-------------Tao tai khoan----------" << endl;
 			cout << setw (44) << right << "ID: " ;
 			cin >> _id;
-			if (SearchID(b, n, _id) != -1)
+			if (SearchID(b, n, _id) != -1)//Trường hợp ID đã tồn tại
 			{
 				system("cls");
 				cout << setw (65) << right << "ID da ton tai !!!" << endl;
-				system("pause");
-				continue;
+				system("pause");//Dừng màn hình console
+				break;
 			}
-			else
+			else//Trường hợp ID chưa tồn tại
 			{
 				cin.ignore();
 				cout << setw (51) << right << "Ho va ten: ";
@@ -804,12 +805,12 @@ int main()
 				system("cls");
 			}
 		}	
-		// Con day la xu ly loi nhap sai	
+		//Lỗi nhập sai
 		else
 		{
 			system("cls");
 			cout << "\n\n\n";
-			cout << setw (34) << "" << "NHAP SAI !!!" << endl;
+			cout << setw (34) << "" << "NHAP SAI, VUI LONG NHAP LAI !!!" << endl;
 			cout << "\n\n\n";
 			system("pause");
 			system("cls");
@@ -824,18 +825,18 @@ string passwordInput(unsigned maxLength)
     string pw;
     for (char c; (c = getch()); )
     {
-        if (c == '\n' || c == '\r') { //phím enter
+        if (c == '\n' || c == '\r') { //Phím enter
             cout << "\n";
             break;
         } 
-		else if (c == '\b') { //phím backspace
+		else if (c == '\b') { //Phím backspace
             cout << "\b \b";
             if (!pw.empty()) pw.erase(pw.size()-1);
         } 
-		else if (c == -32) { //phím mũi tên
-            _getch(); //bỏ qua kí tự tiếp theo (hướng mũi tên)
+		else if (c == -32) { //Phím mũi tên
+            _getch(); //Bỏ qua kí tự tiếp theo (hướng mũi tên)
         } 
-		else if (isprint(c) && pw.size() < maxLength) { //isprint tức là chỉ nhận những ký tự in ra được (có tính khoảng trắng)
+		else if (isprint(c) && pw.size() < maxLength) { //Isprint tức là chỉ nhận những ký tự in ra được (có tính khoảng trắng)
             cout << '*';
             pw += c;
         }
@@ -848,36 +849,27 @@ string password(unsigned maxLength)
     string pw;
     for (char c; (c = getch()); )
     {
-        if (c == '\n' || c == '\r') { //phím enter
+        if (c == '\n' || c == '\r') { //Phím enter
             cout << "\n";
             break;
         } 
-		else if (c == '\b') { //phím backspace
+		else if (c == '\b') { //Phím backspace
             cout << "\b \b";
             if (!pw.empty()) pw.erase(pw.size()-1);
         } 
-		else if (c == -32 || (c >= 65 && c <= 90) || (c >= 97 && c <= 122) || c == ' ') { //phím mũi tên
-            _getch(); //bỏ qua kí tự tiếp theo (hướng mũi tên)
+		else if (c == -32 || (c >= 65 && c <= 90) || (c >= 97 && c <= 122) || c == ' ') { //Phím mũi tên
+            _getch(); //Bỏ qua kí tự tiếp theo (hướng mũi tên)
         } 
-		else if (isprint(c) && pw.size() < maxLength) { //isprint tức là chỉ nhận những ký tự in ra được (có tính khoảng trắng)
+		else if (isprint(c) && pw.size() < maxLength) { //Isprint tức là chỉ nhận những ký tự in ra được (có tính khoảng trắng)
             cout << c;
             pw += c;
         }
     }
     return pw;
 }
-
-// ham dinh dang man hinh console
-void setCoLor(int backgound_color, int text_color)
-{
-    HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
-
-    int color_code = backgound_color * 16 + text_color;
-    SetConsoleTextAttribute(hStdout, color_code);
-}
-
 void dinhDang()
 {
-	SetConsoleTitle("ATM");
-	setCoLor(0, 2);
+	SetConsoleTitle("ATM demo");// Tiêu đề console
+	 HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+	 SetConsoleTextAttribute(hStdout, 5);//Màu text (màu hồng nam tính)
 }
